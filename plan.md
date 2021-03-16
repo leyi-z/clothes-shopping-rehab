@@ -1,17 +1,12 @@
-## Core
+### Basic
+
+
 
 
 ### Data Structure
 
 
-##### General: `Category`
-
-- categories of clothes
-- Columns:
-	- id: primary key
-	- name: e.g. tshirt, jacket, etc
-
-##### User Created: `Location_<user_id>`
+##### Table `Location`
 
 - storage locations
 - columns:
@@ -19,13 +14,13 @@
 	- container
 	- room
 
-##### User Created: `Clothes_<user_id>`
+##### Table `Clothes`
 
 - created by user via button `create inventory`
 - columns:
 	- id: primary key
-	- category: foreign key
 	- location: foreign key
+	- category
 	- description
 	- quantity
 	
@@ -37,14 +32,18 @@
 
 #### Roles
 
-##### Recorder
+##### Recorder 
 - basically a general user
 - has the following permissions
-	- get inventory
-	- create inventory 
-	- patch inventory
-	- delete inventory
+	- `get:inventory`
+	- `add:inventory` 
+	- `edit:inventory`
+	- `delete:inventory`
 
+##### Psychiatrist
+- can see what the recorder has
+- has the following permissions:
+	- `get:inventory`
 
 
 
@@ -58,7 +57,7 @@
 ##### GET `/`
 
 - public
-- generic homepage
+- generic homepage & user login
 - `curl --request GET http://localhost:5000/`
 
 ##### GET `/login`
@@ -67,114 +66,59 @@
 - login/signup page; probably going to be auth0?
 - `curl --request GET http://localhost:5000/login`
 
-##### GET `/<user_id>`
+##### GET `/locations`
 
-- user authentication required
-- user's homepage
-- checks if user created inventory exists, and returns:
-	- `create inventory` button if doesn't exist
-	- user's inventory at primary location if exists
-- `curl --request GET http://localhost:5000/user123`
-	
-##### POST `/<user_id>/create`
-
-- user authentication required
-- creates user tables: location and clothes
-- `curl -X POST http://localhost:5000/user123/create`
-
-##### GET `/<user_id>/locations`
-
-- user authentication required
+- permission required: `get:inventory`
 - returns the contents of user's table `locations`
-- `curl --request GET http://localhost:5000/user123/locations`
+- `curl --request GET http://localhost:5000/locations`
 
-##### POST `/<user_id>/locations`
+##### GET `/locations/<location_id>`
 
-- user authentication required
+- permission required: `get:inventory`
+- returns the contents of user's table `locations`
+- `curl --request GET http://localhost:5000/locations`
+
+##### POST `/locations`
+
+- permission required: `add:inventory`
 - add entries to user's table `locations`
-- `curl -X POST http://127.0.0.1:5000/user123/locations`
+- `curl -X POST http://127.0.0.1:5000/locations`
 
-##### PATCH `/<user_id>/locations`
+##### PATCH `/locations`
 
-- user authentication required
+- permission required: `edit:inventory`
 - update entries of user's table `locations`
-- `curl -X PATCH http://127.0.0.1:5000/user123/locations`
+- `curl -X PATCH http://127.0.0.1:5000/locations`
 
-##### DELETE `/<user_id>/locations`
+##### DELETE `/locations`
 
-- user authentication required
+- permission required: `delete:inventory`
 - delete entries of user's table `locations`
-- `curl -X DELETE http://127.0.0.1:5000/user123/locations`
+- `curl -X DELETE http://127.0.0.1:5000/locations`
 
-##### GET `/<user_id>/clothes`
+##### GET `/clothes`
 
-- user authentication required
+- permission required: `get:inventory`
 - returns the contents of user's table `clothes`
-- `curl --request GET http://localhost:5000/user123/clothes`
+- `curl --request GET http://localhost:5000/clothes`
 
-##### POST `/<user_id>/clothes`
+##### POST `/clothes`
 
-- user authentication required
+- permission required: `add:inventory`
 - add entries to user's table `clothes`
-- `curl -X POST http://127.0.0.1:5000/user123/clothes`
+- `curl -X POST http://127.0.0.1:5000/clothes`
 
-##### PATCH `/<user_id>/clothes`
+##### PATCH `/clothes`
 
-- user authentication required
+- permission required: `edit:inventory`
 - update entries of user's table `clothes`
-- `curl -X PATCH http://127.0.0.1:5000/user123/clothes`
+- `curl -X PATCH http://127.0.0.1:5000/clothes`
 
-##### DELETE `/<user_id>/clothes`
+##### DELETE `/clothes`
 
-- recorder role required
+- permission required: `delete:inventory`
 - delete entries of user's table `clothes`
-- `curl -X DELETE http://127.0.0.1:5000/user123/clothes`
-
-
-
-
-
-## Optional
-
-
-#### Role
-
-##### Manager 
-- can manage certain aspects of database
-- has following permissions in addition to Recorder
-	- get category
-	- add category
-	- patch category
-	- delete category
-
-
-#### Endpoints
-
-##### POST `/categories`
-
-- manager role required
-- add entries to the table `categories`
-
-##### PATCH `/categories`
-
-- manager role required
-- update entries of the table `categories`
-
-##### DELETE `/categories`
-
-- manager role required
-- delete entries of the table `categories`
-
-
-
-
-
-
-
-
-
-
-
+- `curl -X DELETE http://127.0.0.1:5000/clothes`
 
 
 
