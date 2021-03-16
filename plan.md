@@ -1,3 +1,6 @@
+## Core
+
+
 ### Data Structure
 
 
@@ -34,7 +37,6 @@
 
 #### Roles
 
-
 ##### Recorder
 - basically a general user
 - has the following permissions
@@ -42,14 +44,6 @@
 	- create inventory 
 	- patch inventory
 	- delete inventory
-
-##### Manager
-- can manage certain aspects of database
-- has following permissions in addition to Recorder
-	- get category
-	- add category
-	- patch category
-	- delete category
 
 
 
@@ -63,74 +57,98 @@
 
 ##### GET `/`
 
-- no permission required
+- public
 - generic homepage
-- test with: `curl --request GET http://localhost:5000/`
-
+- `curl --request GET http://localhost:5000/`
 
 ##### GET `/login`
 
-- no permission required
+- public
 - login/signup page; probably going to be auth0?
-
+- `curl --request GET http://localhost:5000/login`
 
 ##### GET `/<user_id>`
 
-- recorder role required
-- unique to each user
+- user authentication required
+- user's homepage
 - checks if user created inventory exists, and returns:
 	- `create inventory` button if doesn't exist
 	- user's inventory at primary location if exists
+- `curl --request GET http://localhost:5000/user123`
 	
 ##### POST `/<user_id>/create`
 
-- recorder role required
+- user authentication required
 - creates user tables: location and clothes
+- `curl -X POST http://localhost:5000/user123/create`
 
 ##### GET `/<user_id>/locations`
 
-- recorder role required
-- returns the contents of table `locations`
+- user authentication required
+- returns the contents of user's table `locations`
+- `curl --request GET http://localhost:5000/user123/locations`
 
 ##### POST `/<user_id>/locations`
 
-- recorder role required
-- add entries to the table `locations`
+- user authentication required
+- add entries to user's table `locations`
+- `curl -X POST http://127.0.0.1:5000/user123/locations`
 
 ##### PATCH `/<user_id>/locations`
 
-- recorder role required
-- update entries of the table `locations`
+- user authentication required
+- update entries of user's table `locations`
+- `curl -X PATCH http://127.0.0.1:5000/user123/locations`
 
 ##### DELETE `/<user_id>/locations`
 
-- recorder role required
-- delete entries of the table `locations`
+- user authentication required
+- delete entries of user's table `locations`
+- `curl -X DELETE http://127.0.0.1:5000/user123/locations`
 
 ##### GET `/<user_id>/clothes`
 
-- recorder role required
-- returns the contents of table `clothes`
+- user authentication required
+- returns the contents of user's table `clothes`
+- `curl --request GET http://localhost:5000/user123/clothes`
 
 ##### POST `/<user_id>/clothes`
 
-- recorder role required
-- add entries to the table `clothes`
+- user authentication required
+- add entries to user's table `clothes`
+- `curl -X POST http://127.0.0.1:5000/user123/clothes`
 
 ##### PATCH `/<user_id>/clothes`
 
-- recorder role required
-- update entries of the table `clothes`
+- user authentication required
+- update entries of user's table `clothes`
+- `curl -X PATCH http://127.0.0.1:5000/user123/clothes`
 
 ##### DELETE `/<user_id>/clothes`
 
 - recorder role required
-- delete entries of the table `clothes`
+- delete entries of user's table `clothes`
+- `curl -X DELETE http://127.0.0.1:5000/user123/clothes`
 
-##### GET `/categories`
 
-- manager role required
-- returns the contents of table `categories`
+
+
+
+## Optional
+
+
+#### Role
+
+##### Manager 
+- can manage certain aspects of database
+- has following permissions in addition to Recorder
+	- get category
+	- add category
+	- patch category
+	- delete category
+
+
+#### Endpoints
 
 ##### POST `/categories`
 
