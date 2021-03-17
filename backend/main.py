@@ -1,10 +1,17 @@
 from flask import Flask, jsonify, request, abort
 
+from models import db_drop, db_create, setup_db, Location, Clothes
 
 
 
 app = Flask(__name__)
+setup_db(app)
 
+
+
+# Drop and create tables
+# db_drop()
+# db_create()
 
 
 
@@ -35,16 +42,14 @@ def login():
 ########
 @app.route('/locations', methods=['GET'])
 def locations_list():
-    return jsonify("User's locations.")
+    locations = Location.query.order_by(Location.id).all()
+    locations = [location.format() for location in locations]
+    return jsonify({
+        "success": True,
+        "locaions": locations
+    })
 # returns the user's locations; psych and recorder
 # curl --request GET http://localhost:5000/locations
-
-
-@app.route('/locations/<int:location_id>', methods=['GET'])
-def locations_one(location_id):
-    return jsonify("List of clothes at one location.")
-# returns the user's locations; psych and recorder
-# curl --request GET http://localhost:5000/locations/1
 
 
 @app.route('/locations', methods=['POST'])
@@ -54,18 +59,30 @@ def locations_add():
 # curl -X POST http://127.0.0.1:5000/locations
 
 
-@app.route('/locations', methods=['PATCH'])
-def locations_edit():
+@app.route('/locations/<int:location_id>', methods=['GET'])
+def locations_one(location_id):
+    location = Location.query.filter(Location.id == location_id).one_or_none()
+    location = location.format()
+    return jsonify({
+        "success": True,
+        "location": location
+    })
+# returns the user's locations; psych and recorder
+# curl --request GET http://localhost:5000/locations/1
+
+
+@app.route('/locations/<int:location_id>', methods=['PATCH'])
+def locations_edit(location_id):
     return jsonify("To edit user's locations.")
 # edit entries of the user's locations; recorder only
-# curl -X PATCH http://127.0.0.1:5000/locations
+# curl -X PATCH http://127.0.0.1:5000/locations/1
 
 
-@app.route('/locations', methods=['DELETE'])
-def locations_delete():
+@app.route('/locations/<int:location_id>', methods=['DELETE'])
+def locations_delete(location_id):
     return jsonify("To delete user's locations.")
 # delete entries of the user's locations; recorder only
-# curl -X DELETE http://127.0.0.1:5000/locations
+# curl -X DELETE http://127.0.0.1:5000/locations/1
 
 
 
@@ -75,7 +92,12 @@ def locations_delete():
 ########
 @app.route('/clothes', methods=['GET'])
 def clothes_list():
-    return jsonify("This is user's clothes!")
+    clothes = Clothes.query.order_by(Clothes.id).all()
+    clothes = [piece.format() for piece in clothes]
+    return jsonify({
+        "success": True,
+        "clothes": clothes
+    })
 # show all clothes; psych and recorder
 # curl --request GET http://localhost:5000/clothes
 
@@ -87,18 +109,18 @@ def clothes_add():
 # curl -X POST http://127.0.0.1:5000/clothes
 
 
-@app.route('/clothes', methods=['PATCH'])
-def clothes_edit():
+@app.route('/clothes/<int:clothes_id>', methods=['PATCH'])
+def clothes_edit(clothes_id):
     return jsonify("To edit user's clothes.")
 # edit entries of the user's locations; recorder only
-# curl -X PATCH http://127.0.0.1:5000/clothes
+# curl -X PATCH http://127.0.0.1:5000/clothes/1
 
 
-@app.route('/clothes', methods=['DELETE'])
-def clothes_delete():
+@app.route('/clothes/<int:clothes_id>', methods=['DELETE'])
+def clothes_delete(clothes_id):
     return jsonify("To delete user's clothes.")
 # delete entries of the user's locations; recorder only
-# curl -X DELETE http://127.0.0.1:5000/clothes
+# curl -X DELETE http://127.0.0.1:5000/clothes/1
 
 
 

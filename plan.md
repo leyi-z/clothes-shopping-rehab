@@ -72,28 +72,28 @@
 - returns the contents of user's table `locations`
 - `curl --request GET http://localhost:5000/locations`
 
-##### GET `/locations/<location_id>`
-
-- permission required: `get:inventory`
-- returns the contents of user's table `locations`
-- `curl --request GET http://localhost:5000/locations`
-
 ##### POST `/locations`
 
 - permission required: `add:inventory`
 - add entries to user's table `locations`
 - `curl -X POST http://127.0.0.1:5000/locations`
 
-##### PATCH `/locations`
+##### GET `/locations/<location_id>`
+
+- permission required: `get:inventory`
+- returns the contents of user's table `locations` with id `<location_id>`
+- `curl --request GET http://localhost:5000/locations`
+
+##### PATCH `/locations/<location_id>`
 
 - permission required: `edit:inventory`
-- update entries of user's table `locations`
+- update the entry in user's table `locations` with id `<location_id>`
 - `curl -X PATCH http://127.0.0.1:5000/locations`
 
-##### DELETE `/locations`
+##### DELETE `/locations/<location_id>`
 
 - permission required: `delete:inventory`
-- delete entries of user's table `locations`
+- delete the entry in user's table `locations` with id `<location_id>`
 - `curl -X DELETE http://127.0.0.1:5000/locations`
 
 ##### GET `/clothes`
@@ -108,16 +108,16 @@
 - add entries to user's table `clothes`
 - `curl -X POST http://127.0.0.1:5000/clothes`
 
-##### PATCH `/clothes`
+##### PATCH `/clothes/<clothes_id>`
 
 - permission required: `edit:inventory`
-- update entries of user's table `clothes`
+- update the entry in user's table `clothes` with id `<clothes_id>`
 - `curl -X PATCH http://127.0.0.1:5000/clothes`
 
-##### DELETE `/clothes`
+##### DELETE `/clothes/<clothes_id>`
 
 - permission required: `delete:inventory`
-- delete entries of user's table `clothes`
+- delete the entry in user's table `clothes` with id `<clothes_id>`
 - `curl -X DELETE http://127.0.0.1:5000/clothes`
 
 
