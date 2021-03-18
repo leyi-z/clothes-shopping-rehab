@@ -8,10 +8,21 @@ app = Flask(__name__)
 setup_db(app)
 
 
-
-# Drop and create tables
+# Drop and create tables to initialize database
 # db_drop()
 # db_create()
+
+# @app.after_request
+# def after_request(response):
+#     response.headers.add(
+#         'Access-Control-Allow-Headers',
+#         'Content-Type, Authorization'
+#     )
+#     response.headers.add(
+#         'Access-Control-Allow-Methods',
+#         'GET, POST, PATCH, DELETE, OPTIONS'
+#     )
+#     return response
 
 
 
@@ -21,7 +32,6 @@ setup_db(app)
 @app.route('/', methods=['GET'])
 def homepage():
     return jsonify("This is the homepage!")
-# curl --request GET http://localhost:5000/
 
 
 
@@ -32,7 +42,6 @@ def homepage():
 @app.route('/login', methods=['GET'])
 def login():
     return jsonify("This is the login page!")
-# curl --request GET http://localhost:5000/login
 
 
 
@@ -49,40 +58,69 @@ def locations_list():
         "locaions": locations
     })
 # returns the user's locations; psych and recorder
-# curl --request GET http://localhost:5000/locations
 
 
 @app.route('/locations', methods=['POST'])
 def locations_add():
-    return jsonify("To add locations to user's table.")
+    body = request.get_json()
+    new_name = body.get('name', None)
+    try:
+        new_location = Location(
+            name=new_name
+        )
+        new_location.insert()
+        return jsonify({
+            "success": True,
+            "new_id": new_location.id
+        })
+    except Exception as e:
+        print(e)
+        abort(422)
 # add entries to the user's locations; recorder only
-# curl -X POST http://127.0.0.1:5000/locations
 
 
 @app.route('/locations/<int:location_id>', methods=['GET'])
 def locations_one(location_id):
-    location = Location.query.filter(Location.id == location_id).one_or_none()
-    location = location.format()
+    clothes = Clothes.query.filter(Clothes.location == location_id).all()
+    clothes = [piece.format() for piece in clothes]
     return jsonify({
         "success": True,
-        "location": location
+        "clothes": clothes
     })
-# returns the user's locations; psych and recorder
-# curl --request GET http://localhost:5000/locations/1
+# returns clothes stored at specified location; psych and recorder
 
 
 @app.route('/locations/<int:location_id>', methods=['PATCH'])
 def locations_edit(location_id):
-    return jsonify("To edit user's locations.")
+    body = request.get_json()
+    new_name = body.get('name', None)
+    location = Location.query.filter(Location.id == location_id).one_or_none()
+    try:
+        location.name = new_name
+        location.update()
+        return jsonify({
+            "success": True,
+            "updated_id": location.id
+        })
+    except Exception as e:
+        print(e)
+        abort(422)
 # edit entries of the user's locations; recorder only
-# curl -X PATCH http://127.0.0.1:5000/locations/1
 
 
 @app.route('/locations/<int:location_id>', methods=['DELETE'])
 def locations_delete(location_id):
-    return jsonify("To delete user's locations.")
+    location = Location.query.filter(Location.id == location_id).one_or_none()
+    try:
+        location.delete()
+        return jsonify({
+            "success": True,
+            "deleted id": location_id
+        })
+    except Exception as e:
+        print(e)
+        abort(422)
 # delete entries of the user's locations; recorder only
-# curl -X DELETE http://127.0.0.1:5000/locations/1
 
 
 
@@ -99,28 +137,66 @@ def clothes_list():
         "clothes": clothes
     })
 # show all clothes; psych and recorder
-# curl --request GET http://localhost:5000/clothes
 
 
 @app.route('/clothes', methods=['POST'])
 def clothes_add():
-    return jsonify("To add clothes to user's table.")
+    body = request.get_json()
+    new_location = body.get('location', None)
+    new_category = body.get('category', None)
+    new_description = body.get('description', None)
+    try:
+        new_piece = Clothes(
+            location=new_location,
+            category=new_category,
+            description=new_description
+        )
+        new_piece.insert()
+        return jsonify({
+            "success": True,
+            "new_id": new_piece.id
+        })
+    except Exception as e:
+        print(e)
+        abort(422)
 # add entries to the user's locations; recorder only
-# curl -X POST http://127.0.0.1:5000/clothes
 
 
 @app.route('/clothes/<int:clothes_id>', methods=['PATCH'])
 def clothes_edit(clothes_id):
-    return jsonify("To edit user's clothes.")
+    body = request.get_json()
+    new_location = body.get('location', None)
+    new_category = body.get('category', None)
+    new_description = body.get('description', None)
+    piece = Clothes.query.filter(Clothes.id == clothes_id).one_or_none()
+    try:
+        piece.location = new_location
+        piece.category = new_category
+        piece.description = new_description
+        piece.update()
+        return jsonify({
+            "success": True,
+            "updated_id": piece.id
+        })
+    except Exception as e:
+        print(e)
+        abort(422)
 # edit entries of the user's locations; recorder only
-# curl -X PATCH http://127.0.0.1:5000/clothes/1
 
 
 @app.route('/clothes/<int:clothes_id>', methods=['DELETE'])
 def clothes_delete(clothes_id):
-    return jsonify("To delete user's clothes.")
+    piece = Clothes.query.filter(Clothes.id == clothes_id).one_or_none()
+    try:
+        piece.delete()
+        return jsonify({
+            "success": True,
+            "deleted id": clothes_id
+        })
+    except Exception as e:
+        print(e)
+        abort(422)
 # delete entries of the user's locations; recorder only
-# curl -X DELETE http://127.0.0.1:5000/clothes/1
 
 
 
