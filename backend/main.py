@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, abort
 
 from models import db_drop, db_create, setup_db, Location, Clothes
+from auth import AuthError, requires_auth, auth_url
 
 
 
@@ -41,8 +42,12 @@ def homepage():
 ########
 @app.route('/login', methods=['GET'])
 def login():
-    return jsonify("This is the login page!")
+    url = auth_url()
+    return jsonify({
+        "url": url
+    })
 
+    
 
 
 
@@ -50,7 +55,8 @@ def login():
 # Locations
 ########
 @app.route('/locations', methods=['GET'])
-def locations_list():
+@requires_auth('get:inventory')
+def locations_list(jwt):
     locations = Location.query.order_by(Location.id).all()
     locations = [location.format() for location in locations]
     return jsonify({
@@ -61,7 +67,8 @@ def locations_list():
 
 
 @app.route('/locations', methods=['POST'])
-def locations_add():
+@requires_auth('add:inventory')
+def locations_add(jwt):
     body = request.get_json()
     new_name = body.get('name', None)
     try:
@@ -80,7 +87,8 @@ def locations_add():
 
 
 @app.route('/locations/<int:location_id>', methods=['GET'])
-def locations_one(location_id):
+@requires_auth('get:inventory')
+def locations_one(jwt,location_id):
     clothes = Clothes.query.filter(Clothes.location == location_id).all()
     clothes = [piece.format() for piece in clothes]
     return jsonify({
@@ -91,7 +99,8 @@ def locations_one(location_id):
 
 
 @app.route('/locations/<int:location_id>', methods=['PATCH'])
-def locations_edit(location_id):
+@requires_auth('update:inventory')
+def locations_edit(jwt,location_id):
     body = request.get_json()
     new_name = body.get('name', None)
     location = Location.query.filter(Location.id == location_id).one_or_none()
@@ -109,7 +118,8 @@ def locations_edit(location_id):
 
 
 @app.route('/locations/<int:location_id>', methods=['DELETE'])
-def locations_delete(location_id):
+@requires_auth('delete:inventory')
+def locations_delete(jwt,location_id):
     location = Location.query.filter(Location.id == location_id).one_or_none()
     try:
         location.delete()
@@ -129,7 +139,8 @@ def locations_delete(location_id):
 # Clothes
 ########
 @app.route('/clothes', methods=['GET'])
-def clothes_list():
+@requires_auth('get:inventory')
+def clothes_list(jwt):
     clothes = Clothes.query.order_by(Clothes.id).all()
     clothes = [piece.format() for piece in clothes]
     return jsonify({
@@ -140,7 +151,8 @@ def clothes_list():
 
 
 @app.route('/clothes', methods=['POST'])
-def clothes_add():
+@requires_auth('add:inventory')
+def clothes_add(jwt):
     body = request.get_json()
     new_location = body.get('location', None)
     new_category = body.get('category', None)
@@ -163,7 +175,8 @@ def clothes_add():
 
 
 @app.route('/clothes/<int:clothes_id>', methods=['PATCH'])
-def clothes_edit(clothes_id):
+@requires_auth('update:inventory')
+def clothes_edit(jwt,clothes_id):
     body = request.get_json()
     new_location = body.get('location', None)
     new_category = body.get('category', None)
@@ -185,7 +198,8 @@ def clothes_edit(clothes_id):
 
 
 @app.route('/clothes/<int:clothes_id>', methods=['DELETE'])
-def clothes_delete(clothes_id):
+@requires_auth('delete:inventory')
+def clothes_delete(jwt,clothes_id):
     piece = Clothes.query.filter(Clothes.id == clothes_id).one_or_none()
     try:
         piece.delete()
@@ -199,5 +213,70 @@ def clothes_delete(clothes_id):
 # delete entries of the user's locations; recorder only
 
 
+
+########
+# Error Handlers
+########
+@app.errorhandler(400)
+def bad_request(error):
+    return jsonify({
+        "success": False,
+        "error": 400,
+        "message": "Bad request"
+    }), 400
+
+
+@app.errorhandler(401)
+def unauthorized(error):
+    return jsonify({
+        "success": False,
+        "error": 401,
+        "message": "unauthorized"
+    }), 401
+
+
+@app.errorhandler(404)
+def not_found(error):
+    return jsonify({
+        "success": False,
+        "error": 404,
+        "message": "not found"
+    }), 404
+
+
+@app.errorhandler(405)
+def method_not_allowed(error):
+    return jsonify({
+        "success": False,
+        "error": 405,
+        "message": "method not allowed"
+    }), 405
+
+
+@app.errorhandler(422)
+def unprocessable(error):
+    return jsonify({
+        "success": False,
+        "error": 422,
+        "message": "unprocessable"
+    }), 422
+
+
+@app.errorhandler(500)
+def server_error(error):
+    return jsonify({
+        "success": False,
+        "error": 500,
+        "message": "internal server error"
+    }), 500
+
+
+@app.errorhandler(AuthError)
+def auth_error(error):
+    return jsonify({
+        "success": False,
+        "error": 401,
+        "message": "unauthorized"
+    }), 401
 
 

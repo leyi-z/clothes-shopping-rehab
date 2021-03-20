@@ -10,6 +10,20 @@
 			"item": [
 				{
 					"name": "homepage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -27,6 +41,20 @@
 				},
 				{
 					"name": "/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -44,6 +72,19 @@
 				},
 				{
 					"name": "/locations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -61,6 +102,19 @@
 				},
 				{
 					"name": "/locations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -87,6 +141,19 @@
 				},
 				{
 					"name": "/locations/<location_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -105,6 +172,19 @@
 				},
 				{
 					"name": "/locations/<location_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -132,6 +212,19 @@
 				},
 				{
 					"name": "/locations/<location_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -150,6 +243,19 @@
 				},
 				{
 					"name": "/clothes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -174,6 +280,19 @@
 				},
 				{
 					"name": "/clothes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -200,6 +319,19 @@
 				},
 				{
 					"name": "/clothes/<clothes_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "PATCH",
 						"header": [],
@@ -227,6 +359,19 @@
 				},
 				{
 					"name": "/clothes/<clothes_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -242,6 +387,832 @@
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "psych",
+			"item": [
+				{
+					"name": "homepage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/locations",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"blehbleh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/locations",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations/<location_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/locations/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations/<location_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bleh updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/locations/4",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations/<location_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/locations/5",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clothes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/clothes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clothes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clothes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": \"3\",\n    \"category\": \"jacket\",\n    \"description\": \"grey long\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clothes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clothes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clothes/<clothes_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": 3,\n    \"category\": \"bleh\",\n    \"description\": \"updated bleh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clothes/8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clothes",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clothes/<clothes_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/clothes/8",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clothes",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkdQdUV5MzNfS00xaVpXUl9INU9EcyJ9.eyJpc3MiOiJodHRwczovL2xleWlzLWNzcnAudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwNTVjNjhlNDFiODk3MDA2OTAyOGMzZCIsImF1ZCI6ImNzcnAiLCJpYXQiOjE2MTYyMzQ1NTIsImV4cCI6MTYxNjMyMDk1MiwiYXpwIjoiUE9JRVdncVVGSE9LRWs2NGZwMmZEZUEwTFR2YnV1NngiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDppbnZlbnRvcnkiXX0.Lk1BddL6vvCtvUqWNS2vfmW83CYy-lDcEQVRjYWqIqv8TjvQRQmi1zAZF1VF8MQIfI_3eU0ThIjnHUCVNYrf-pySZErgX9v4CJTGAaxRXEHWkwt0Px76pnAi1LR4tUYcHf_HdtKJHB818Zl_ln9fk1XHQUL9C57p34IDB_HLuF5Bg4JzoM8Khp8MHT89qjvClsdbM4tgXBmCFkrnqHH6RMLy3711G0F4XhKOWZ_ZeL7kl_1WS9DwjwMfAO12UjQy4kj7OuyVkFMlpFviddTGXcsdi2L4pq3GNiTptVPLca26WBtme39c0Q1FPIRCiNGC1TYRdVt1UXzr_SDVCffTOA",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "recorder",
+			"item": [
+				{
+					"name": "homepage",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/login",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/locations",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"blehblah\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/locations",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations/<location_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/locations/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations/<location_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"blahe updated\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/locations/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/locations/<location_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/locations/6",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"locations",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clothes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{host}}/clothes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clothes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clothes",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": \"3\",\n    \"category\": \"gahghahga\",\n    \"description\": \"belhebl long\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clothes",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clothes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clothes/<clothes_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"location\": 3,\n    \"category\": \"blajdhkaj\",\n    \"description\": \"updated bleh\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/clothes/13",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clothes",
+								"13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/clothes/<clothes_id>",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/clothes/13",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clothes",
+								"13"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkdQdUV5MzNfS00xaVpXUl9INU9EcyJ9.eyJpc3MiOiJodHRwczovL2xleWlzLWNzcnAudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwNTVjNzg1OGEyNGQ3MDA3MGVmYTQ4YiIsImF1ZCI6ImNzcnAiLCJpYXQiOjE2MTYyMzQ2NDYsImV4cCI6MTYxNjMyMTA0NiwiYXpwIjoiUE9JRVdncVVGSE9LRWs2NGZwMmZEZUEwTFR2YnV1NngiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImFkZDppbnZlbnRvcnkiLCJkZWxldGU6aW52ZW50b3J5IiwiZ2V0OmludmVudG9yeSIsInVwZGF0ZTppbnZlbnRvcnkiXX0.GNtlVt-6_ak-xl7OR0O3ws-yMkhUnl1IIlGgsDglYpIq8O0zlnvoJpnHtQQoX8KM286vCmoinqdd1sb4WHgj-vZd_ZjkPqGNRERLohYhZxkMnyjXRzeZxv0m4wqtn_smIpcKJjJs3qdnKRAqb3utkZKFekKhc00HFyFHGBsHKh0Kgf4GRF2gTEmTt5FAXyKO9GghGVib4ZOGKc-BHvjJwWaQ2XZAJIy-NDdnWPiiQd1j9PufCuMTOcZsBYd0HLiXFVKOG81ncEchl-gwGzgG1EpteZugfMpyRwN1lzIswZ-aVtKNsas6Szm9EnF3G1-oVDlKeLF2NjkmDSxQeKqZzg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		}
