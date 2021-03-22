@@ -10,8 +10,8 @@ setup_db(app)
 
 
 # Drop and create tables to initialize database
-db_drop()
-db_create()
+# db_drop()
+# db_create()
 
 # @app.after_request
 # def after_request(response):
