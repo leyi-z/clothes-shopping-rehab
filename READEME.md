@@ -14,17 +14,17 @@ I have A LOT of clothes, but it all gets forgotten whenever I see a nice new dre
 
 The api is deployed using Heroku. The host url is `csrp-deploy.herokuapp.com`. You can access the homepage with the url `https://csrp-deploy.herokuapp.com/`
 
-#### Frontend
+#### Tests
 
-This web app doesn't have a frontend yet but hopefully it will soon!
+I created some postman tests for the api. To use them, simply import the file `csrp-tests.postman_collection.json` into postman.
 
 #### Dependency
 
 In case you want to run the app locally, all required packages are specified in the file `requirements.txt`. You can use the command `pip install -r requirements.txt` to install all of them at once.
 
-#### Tests
+#### Frontend
 
-I created some postman tests for the api. To use them, simply import the file `tests/csrp-tests.postman_collection.json` into postman.
+This web app doesn't have a frontend yet but hopefully it will soon!
 
 
 
