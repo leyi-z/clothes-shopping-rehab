@@ -3,9 +3,12 @@ export DATABASE_URL="postgres://leyi_psql@localhost:5432/db_csrp"
 
 
 # Auth0 setup
-export AUTH0_CALLBACK_URL='http://localhost:5000/locations'
+
 export AUTH0_DOMAIN='leyis-csrp.us.auth0.com'
+export ALGORITHMS='RS256'
+export API_AUDIENCE='csrp'
 export AUTH0_CLIENT_ID='POIEWgqUFHOKEk64fp2fDeA0LTvbuu6x'
+export AUTH0_CALLBACK_URL='http://localhost:5000/locations'
 
 
 # Recorder JWT

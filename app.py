@@ -5,10 +5,10 @@ from models import db_drop, db_create, setup_db, Location, Clothes
 from auth import AuthError, requires_auth, auth_url
 
 
-
 app = Flask(__name__)
 setup_db(app)
 CORS(app)
+
 
 @app.after_request
 def after_request(response):
@@ -27,8 +27,6 @@ def after_request(response):
 # db_create()
 
 
-
-
 ########
 # Homepage
 ########
@@ -37,10 +35,8 @@ def homepage():
     return jsonify("This is the homepage!")
 
 
-
-
 ########
-# Login 
+# Login
 ########
 @app.route('/login', methods=['GET'])
 def login():
@@ -52,9 +48,6 @@ def login():
     except Exception as e:
         print(e)
         abort(404)
-
-    
-
 
 
 ########
@@ -98,7 +91,7 @@ def locations_add(jwt):
 
 @app.route('/locations/<int:location_id>', methods=['GET'])
 @requires_auth('get:inventory')
-def locations_one(jwt,location_id):
+def locations_one(jwt, location_id):
     try:
         clothes = Clothes.query.filter(Clothes.location == location_id).all()
         clothes = [piece.format() for piece in clothes]
@@ -114,11 +107,12 @@ def locations_one(jwt,location_id):
 
 @app.route('/locations/<int:location_id>', methods=['PATCH'])
 @requires_auth('update:inventory')
-def locations_edit(jwt,location_id):
+def locations_edit(jwt, location_id):
     try:
         body = request.get_json()
         new_name = body.get('name', None)
-        location = Location.query.filter(Location.id == location_id).one_or_none()
+        location = Location.query.filter(Location.id == location_id) \
+            .one_or_none()
         location.name = new_name
         location.update()
         return jsonify({
@@ -133,9 +127,10 @@ def locations_edit(jwt,location_id):
 
 @app.route('/locations/<int:location_id>', methods=['DELETE'])
 @requires_auth('delete:inventory')
-def locations_delete(jwt,location_id):
+def locations_delete(jwt, location_id):
     try:
-        location = Location.query.filter(Location.id == location_id).one_or_none()
+        location = Location.query.filter(Location.id == location_id) \
+            .one_or_none()
         location.delete()
         return jsonify({
             "success": True,
@@ -145,8 +140,6 @@ def locations_delete(jwt,location_id):
         print(e)
         abort(422)
 # delete entries of the user's locations; recorder only
-
-
 
 
 ########
@@ -194,7 +187,7 @@ def clothes_add(jwt):
 
 @app.route('/clothes/<int:clothes_id>', methods=['PATCH'])
 @requires_auth('update:inventory')
-def clothes_edit(jwt,clothes_id):
+def clothes_edit(jwt, clothes_id):
     try:
         body = request.get_json()
         new_location = body.get('location', None)
@@ -217,7 +210,7 @@ def clothes_edit(jwt,clothes_id):
 
 @app.route('/clothes/<int:clothes_id>', methods=['DELETE'])
 @requires_auth('delete:inventory')
-def clothes_delete(jwt,clothes_id):
+def clothes_delete(jwt, clothes_id):
     try:
         piece = Clothes.query.filter(Clothes.id == clothes_id).one_or_none()
         piece.delete()
@@ -229,7 +222,6 @@ def clothes_delete(jwt,clothes_id):
         print(e)
         abort(422)
 # delete entries of the user's locations; recorder only
-
 
 
 ########
@@ -296,5 +288,3 @@ def auth_error(error):
         "error": 401,
         "message": "unauthorized"
     }), 401
-
-

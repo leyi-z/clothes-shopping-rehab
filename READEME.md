@@ -16,11 +16,17 @@ The api is deployed using Heroku. The host url is `csrp-deploy.herokuapp.com`. Y
 
 #### Tests
 
-I created some postman tests for the api. To use them, simply import the file `csrp-tests.postman_collection.json` into postman.
+I created some tests for the api using both Postman and Unittest:
+- To use the postman tests, simply import the file `csrp-tests.postman_collection.json` into postman
+- Unittest can be found in `test_app.py`. You can run it using `python test_app.py`
 
 #### Dependency
 
 In case you want to run the app locally, all required packages are specified in the file `requirements.txt`. You can use the command `pip install -r requirements.txt` to install all of them at once.
+
+#### Environment Variables
+
+Before running the backend locally, run command `source setup.sh` in the project directory to set up environment variables. It includes the database url, some authentication info, and some recently generated jwt codes.
 
 #### Frontend
 

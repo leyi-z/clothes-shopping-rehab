@@ -6,14 +6,11 @@ from jose import jwt
 from urllib.request import urlopen
 
 
-
-AUTH0_DOMAIN = 'leyis-csrp.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'csrp'
-AUTH0_CLIENT_ID = 'POIEWgqUFHOKEk64fp2fDeA0LTvbuu6x'
-
+AUTH0_DOMAIN = os.environ.get('AUTH0_DOMAIN')
+ALGORITHMS = os.environ.get('ALGORITHMS')
+API_AUDIENCE = os.environ.get('API_AUDIENCE')
+AUTH0_CLIENT_ID = os.environ.get('AUTH0_CLIENT_ID')
 AUTH0_CALLBACK_URL = os.environ.get('AUTH0_CALLBACK_URL')
-
 
 
 # Generate login url
@@ -26,14 +23,12 @@ def auth_url():
     return url
 
 
-
 # AuthError Exception
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
         self.status_code = status_code
-        
-        
+
 
 # Auth Header
 def get_token_auth_header():
@@ -62,9 +57,8 @@ def get_token_auth_header():
         }, 401)
     token = parts[1]
     return token
-    
-    
-    
+
+
 # Check if jwt contains required permission
 def check_permissions(permission, payload):
     if 'permissions' not in payload:
@@ -78,7 +72,6 @@ def check_permissions(permission, payload):
             'description': 'Permission not found.'
         }, 403)
     return True
-
 
 
 # Verify user identity
@@ -120,7 +113,7 @@ def verify_decode_jwt(token):
         except jwt.JWTClaimsError:
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'Incorrect claims. Please, check the audience and issuer.'
+                'description': 'Incorrect claims. Check audience and issuer.'
             }, 401)
         except Exception:
             raise AuthError({
@@ -131,9 +124,8 @@ def verify_decode_jwt(token):
         'code': 'invalid_header',
                 'description': 'Unable to find the appropriate key.'
     }, 400)
-   
-   
-      
+
+
 def requires_auth(permission=''):
     def requires_auth_decorator(f):
         @wraps(f)
@@ -143,6 +135,4 @@ def requires_auth(permission=''):
             check_permissions(permission, payload)
             return f(payload, *args, **kwargs)
         return wrapper
-    return requires_auth_decorator    
-    
-    
+    return requires_auth_decorator
