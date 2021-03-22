@@ -1,15 +1,13 @@
+import os
 from flask_sqlalchemy import SQLAlchemy
 
 
-database_name = "db_csrp"
-database_path = "postgres://{}@{}/{}".format('leyi_psql', 'localhost:5432', database_name)
-
-
 db = SQLAlchemy()
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 
 def setup_db(app):
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_path
+    app.config["SQLALCHEMY_DATABASE_URI"] = DATABASE_URL
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.app = app
     db.init_app(app)

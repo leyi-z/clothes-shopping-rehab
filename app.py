@@ -10,8 +10,8 @@ setup_db(app)
 
 
 # Drop and create tables to initialize database
-# db_drop()
-# db_create()
+db_drop()
+db_create()
 
 # @app.after_request
 # def after_request(response):
@@ -42,10 +42,14 @@ def homepage():
 ########
 @app.route('/login', methods=['GET'])
 def login():
-    url = auth_url()
-    return jsonify({
-        "url": url
-    })
+    try:
+        url = auth_url()
+        return jsonify({
+            "url": url
+        })
+    except Exception as e:
+        print(e)
+        abort(404)
 
     
 
@@ -57,21 +61,25 @@ def login():
 @app.route('/locations', methods=['GET'])
 @requires_auth('get:inventory')
 def locations_list(jwt):
-    locations = Location.query.order_by(Location.id).all()
-    locations = [location.format() for location in locations]
-    return jsonify({
-        "success": True,
-        "locaions": locations
-    })
+    try:
+        locations = Location.query.order_by(Location.id).all()
+        locations = [location.format() for location in locations]
+        return jsonify({
+            "success": True,
+            "locaions": locations
+        })
+    except Exception as e:
+        print(e)
+        abort(404)
 # returns the user's locations; psych and recorder
 
 
 @app.route('/locations', methods=['POST'])
 @requires_auth('add:inventory')
 def locations_add(jwt):
-    body = request.get_json()
-    new_name = body.get('name', None)
     try:
+        body = request.get_json()
+        new_name = body.get('name', None)
         new_location = Location(
             name=new_name
         )
@@ -89,22 +97,26 @@ def locations_add(jwt):
 @app.route('/locations/<int:location_id>', methods=['GET'])
 @requires_auth('get:inventory')
 def locations_one(jwt,location_id):
-    clothes = Clothes.query.filter(Clothes.location == location_id).all()
-    clothes = [piece.format() for piece in clothes]
-    return jsonify({
-        "success": True,
-        "clothes": clothes
-    })
+    try:
+        clothes = Clothes.query.filter(Clothes.location == location_id).all()
+        clothes = [piece.format() for piece in clothes]
+        return jsonify({
+            "success": True,
+            "clothes": clothes
+        })
+    except Exception as e:
+        print(e)
+        abort(404)
 # returns clothes stored at specified location; psych and recorder
 
 
 @app.route('/locations/<int:location_id>', methods=['PATCH'])
 @requires_auth('update:inventory')
 def locations_edit(jwt,location_id):
-    body = request.get_json()
-    new_name = body.get('name', None)
-    location = Location.query.filter(Location.id == location_id).one_or_none()
     try:
+        body = request.get_json()
+        new_name = body.get('name', None)
+        location = Location.query.filter(Location.id == location_id).one_or_none()
         location.name = new_name
         location.update()
         return jsonify({
@@ -120,8 +132,8 @@ def locations_edit(jwt,location_id):
 @app.route('/locations/<int:location_id>', methods=['DELETE'])
 @requires_auth('delete:inventory')
 def locations_delete(jwt,location_id):
-    location = Location.query.filter(Location.id == location_id).one_or_none()
     try:
+        location = Location.query.filter(Location.id == location_id).one_or_none()
         location.delete()
         return jsonify({
             "success": True,
@@ -141,23 +153,27 @@ def locations_delete(jwt,location_id):
 @app.route('/clothes', methods=['GET'])
 @requires_auth('get:inventory')
 def clothes_list(jwt):
-    clothes = Clothes.query.order_by(Clothes.id).all()
-    clothes = [piece.format() for piece in clothes]
-    return jsonify({
-        "success": True,
-        "clothes": clothes
-    })
+    try:
+        clothes = Clothes.query.order_by(Clothes.id).all()
+        clothes = [piece.format() for piece in clothes]
+        return jsonify({
+            "success": True,
+            "clothes": clothes
+        })
+    except Exception as e:
+        print(e)
+        abort(404)
 # show all clothes; psych and recorder
 
 
 @app.route('/clothes', methods=['POST'])
 @requires_auth('add:inventory')
 def clothes_add(jwt):
-    body = request.get_json()
-    new_location = body.get('location', None)
-    new_category = body.get('category', None)
-    new_description = body.get('description', None)
     try:
+        body = request.get_json()
+        new_location = body.get('location', None)
+        new_category = body.get('category', None)
+        new_description = body.get('description', None)
         new_piece = Clothes(
             location=new_location,
             category=new_category,
@@ -177,12 +193,12 @@ def clothes_add(jwt):
 @app.route('/clothes/<int:clothes_id>', methods=['PATCH'])
 @requires_auth('update:inventory')
 def clothes_edit(jwt,clothes_id):
-    body = request.get_json()
-    new_location = body.get('location', None)
-    new_category = body.get('category', None)
-    new_description = body.get('description', None)
-    piece = Clothes.query.filter(Clothes.id == clothes_id).one_or_none()
     try:
+        body = request.get_json()
+        new_location = body.get('location', None)
+        new_category = body.get('category', None)
+        new_description = body.get('description', None)
+        piece = Clothes.query.filter(Clothes.id == clothes_id).one_or_none()
         piece.location = new_location
         piece.category = new_category
         piece.description = new_description
@@ -200,8 +216,8 @@ def clothes_edit(jwt,clothes_id):
 @app.route('/clothes/<int:clothes_id>', methods=['DELETE'])
 @requires_auth('delete:inventory')
 def clothes_delete(jwt,clothes_id):
-    piece = Clothes.query.filter(Clothes.id == clothes_id).one_or_none()
     try:
+        piece = Clothes.query.filter(Clothes.id == clothes_id).one_or_none()
         piece.delete()
         return jsonify({
             "success": True,

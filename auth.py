@@ -1,4 +1,5 @@
 import json
+import os
 from flask import request
 from functools import wraps
 from jose import jwt
@@ -6,13 +7,12 @@ from urllib.request import urlopen
 
 
 
-# Auth0 setup
 AUTH0_DOMAIN = 'leyis-csrp.us.auth0.com'
-ALGORITHMS = ['RS256']
-API_AUDIENCE = 'csrp'
+ALGORITHMS=['RS256']
+API_AUDIENCE='csrp'
+AUTH0_CLIENT_ID='POIEWgqUFHOKEk64fp2fDeA0LTvbuu6x'
 
-AUTH0_CLIENT_ID = 'POIEWgqUFHOKEk64fp2fDeA0LTvbuu6x'
-AUTH0_CALLBACK_URL = 'http://localhost:5000/locations'
+AUTH0_CALLBACK_URL = os.environ.get('AUTH0_CALLBACK_URL')
 
 
 
