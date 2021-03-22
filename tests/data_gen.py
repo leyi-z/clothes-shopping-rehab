@@ -6,7 +6,7 @@ sys.path.insert(0, parent_dir)
 
 # Import tables from files
 from models import *
-from main import *
+from app import *
 
 
 s = db.session()
