@@ -8,9 +8,9 @@ from urllib.request import urlopen
 
 
 AUTH0_DOMAIN = 'leyis-csrp.us.auth0.com'
-ALGORITHMS=['RS256']
-API_AUDIENCE='csrp'
-AUTH0_CLIENT_ID='POIEWgqUFHOKEk64fp2fDeA0LTvbuu6x'
+ALGORITHMS = ['RS256']
+API_AUDIENCE = 'csrp'
+AUTH0_CLIENT_ID = 'POIEWgqUFHOKEk64fp2fDeA0LTvbuu6x'
 
 AUTH0_CALLBACK_URL = os.environ.get('AUTH0_CALLBACK_URL')
 

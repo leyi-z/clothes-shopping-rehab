@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request, abort
+from flask_cors import CORS
 
 from models import db_drop, db_create, setup_db, Location, Clothes
 from auth import AuthError, requires_auth, auth_url
@@ -7,23 +8,24 @@ from auth import AuthError, requires_auth, auth_url
 
 app = Flask(__name__)
 setup_db(app)
+CORS(app)
 
+@app.after_request
+def after_request(response):
+    response.headers.add(
+        'Access-Control-Allow-Headers',
+        'Content-Type, Authorization'
+    )
+    response.headers.add(
+        'Access-Control-Allow-Methods',
+        'GET, POST, PATCH, DELETE, OPTIONS'
+    )
+    return response
 
 # Drop and create tables to initialize database
 # db_drop()
 # db_create()
 
-# @app.after_request
-# def after_request(response):
-#     response.headers.add(
-#         'Access-Control-Allow-Headers',
-#         'Content-Type, Authorization'
-#     )
-#     response.headers.add(
-#         'Access-Control-Allow-Methods',
-#         'GET, POST, PATCH, DELETE, OPTIONS'
-#     )
-#     return response
 
 
 
