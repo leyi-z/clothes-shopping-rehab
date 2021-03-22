@@ -4,3 +4,6 @@
 
 # Security
 **/userinfo.*
+
+# To Self
+/toself

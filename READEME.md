@@ -57,7 +57,7 @@ The psychiatrist (psych) can only see what's in the database but has no permissi
 
 #### Test Users
 
-I created two users for testing purpose, each with one of the two roles. You can use the following login info to login as each user and test the endpoints. I also included JWT tokens for each user that I recently generated (on 03/22). 
+I created two users for testing purpose, each with one of the two roles. You can use the following login info to login as each user and test the endpoints. I also included JWT for each user that I recently generated (on 03/22). 
 
 ##### Test User: Recorder
 - username: `recorder@gmail.com`
