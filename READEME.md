@@ -12,7 +12,7 @@ I have A LOT of clothes, but it all gets forgotten whenever I see a nice new dre
 
 #### Heroku
 
-The api is deployed using Heroku. The host url is `csrp-deploy.herokuapp.com`. You can access the homepage with the url `https://csrp-deploy.herokuapp.com/`
+~~The api is deployed using Heroku. The host url is `csrp-deploy.herokuapp.com`. You can access the homepage with the url `https://csrp-deploy.herokuapp.com/`~~ The public host is no longer running. It can only be accessed locally.
 
 #### Tests
 
@@ -26,11 +26,19 @@ In case you want to run the app locally, all required packages are specified in 
 
 #### Environment Variables
 
-Before running the backend locally, run command `source setup.sh` in the project directory to set up environment variables. It includes the database url, some authentication info, and some recently generated jwt codes.
+Before running the backend locally, run command `source setup.sh` in the project directory to set up environment variables. It includes the database url, some authentication info, and some recently generated jwt codes. You will probably have to change the database url to fit your environment.
 
 #### Frontend
 
 This web app doesn't have a frontend yet but hopefully it will soon!
+
+#### Run Locally
+
+After installing all the dependencies and setting up the environment variables, run the following command in the project directory:
+```
+$ export FLASK_APP=app.py
+$ flask run
+```
 
 
 
@@ -68,12 +76,10 @@ I created two users for testing purpose, each with one of the two roles. You can
 ##### Test User: Recorder
 - username: `recorder@gmail.com`
 - password: `Recorder123!`
-- jwt token: `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkdQdUV5MzNfS00xaVpXUl9INU9EcyJ9.eyJpc3MiOiJodHRwczovL2xleWlzLWNzcnAudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwNTVjNzg1OGEyNGQ3MDA3MGVmYTQ4YiIsImF1ZCI6ImNzcnAiLCJpYXQiOjE2MTYzOTU2MDAsImV4cCI6MTYxNjQ4MjAwMCwiYXpwIjoiUE9JRVdncVVGSE9LRWs2NGZwMmZEZUEwTFR2YnV1NngiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImFkZDppbnZlbnRvcnkiLCJkZWxldGU6aW52ZW50b3J5IiwiZ2V0OmludmVudG9yeSIsInVwZGF0ZTppbnZlbnRvcnkiXX0.qU4CZ307M6Ku8giiejG9gsESDSR-6KQ07fzfr2MatVdrfEPOMSDdOWjvL3ZP-cp1j1I7yOLwqljtb0O3PoGmiNb33hj-ax_ItQaOLG92iVsugEJybjWA2Vu1mkc3ZkL3-m-D65094bfPWqJde95Er0HFnU-hQsPAPKrjMd8JhIpk5yvdcoyoN_LP3fP7w_TiGELiZ9vCBY2pPa__2dtMxPGnBdsz3Q9ts3ufNr71Rb9HdR8LNhGtMU1RwudkWQxr44y5PDHZABOagtDUUF0okAyl29zuKvLcM_dh0DXoDny1okdlibeUc4P6EHlvjl92_bD-JCeq-jFzByfEz2S6CA`
 
 ##### Test User: Psych
 - username: `psych@gmail.com`
 - password: `Psych123!`
-- jwt token: `eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkdQdUV5MzNfS00xaVpXUl9INU9EcyJ9.eyJpc3MiOiJodHRwczovL2xleWlzLWNzcnAudXMuYXV0aDAuY29tLyIsInN1YiI6ImF1dGgwfDYwNTVjNjhlNDFiODk3MDA2OTAyOGMzZCIsImF1ZCI6ImNzcnAiLCJpYXQiOjE2MTY0MDAzMDcsImV4cCI6MTYxNjQ4NjcwNywiYXpwIjoiUE9JRVdncVVGSE9LRWs2NGZwMmZEZUEwTFR2YnV1NngiLCJzY29wZSI6IiIsInBlcm1pc3Npb25zIjpbImdldDppbnZlbnRvcnkiXX0.NGxPr9hasEgskcKTstYi4Qr15bcnLOMpogNbP3gqzMQO44k2kjLJmLfsfEKI5naIRa647ssLgQkmE7-t6pBxiIMpUuOONv_HoDVmsnCwecGh-romq8pKp9xY8Q9rij3VU1wm9RT7gPdzv-FfiYqkigHhxtVu1bOtdvNh9qcbrteWNW-WciTZtOk99P_gbYZ3aw_90un8vk_UCwPrHTazRdZ6bpi4pmq2Dra7jhfS9eBrUKIlLUWF_j2kHYCY_H7TcTR4Cfk3AIH0xGDC9gOnxDPROV6mjBdZh8JC5uaZK4IPGmAF6y9X1ZY2Cmv5zb09vER2aH7AmycWpmJWUCh3Hg`
 
 
 
